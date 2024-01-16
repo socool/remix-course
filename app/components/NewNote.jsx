@@ -10,10 +10,11 @@ function NewNote() {
       <p>
         <label htmlFor="content">Content</label>
         <textarea id="content" name="content" rows="5" required />
-        <div className="form-actions">
-          <button>Add Note</button>
-        </div>
       </p>
+
+      <div className="form-actions">
+        <button>Add Note</button>
+      </div>
     </form>
   );
 }
