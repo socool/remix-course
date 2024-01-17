@@ -17,7 +17,8 @@ export default function NotesPage() {
 //data send from backend to frontend
 export async function loader() {
   const notes = await getStoredNotes();
-  return json(notes);
+  // return json(notes);
+  return notes;
 }
 
 export async function action({ request }) {
