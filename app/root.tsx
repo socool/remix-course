@@ -1,6 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import {
   Links,
+  Link,
   LiveReload,
   Meta,
   Outlet,
@@ -39,4 +40,31 @@ export default function App() {
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
+}
+
+export function ErrorBoundary({ error }) {
+  return (
+    <html lang="en">
+      <head>
+        <Meta />
+        <Links />
+        <title>An error occurred</title>
+      </head>
+      <body>
+        <header>
+          <MainNavigation />
+        </header>
+        <main className="error">
+          <h1>An Error occurred</h1>
+          <p>{error.message}</p>
+          <p>
+            Back to <Link to="/">safety</Link>
+          </p>
+        </main>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  );
 }
