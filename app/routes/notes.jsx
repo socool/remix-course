@@ -29,6 +29,7 @@ export async function action({ request }) {
   noteData.id = new Date().toISOString();
   const updatedNotes = existingNotes.concat(noteData);
   await storedNotes(updatedNotes);
+  await new Promise((r) => setTimeout(r, 1000));
   return redirect("/notes");
 }
 
