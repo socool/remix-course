@@ -1,13 +1,23 @@
 import NewNote, { links as newNoteLinks } from "~/components/NewNote";
+import NoteList, { links as noteListLinks } from "../components/NoteList";
 import { getStoredNotes, storedNotes } from "~/data/notes";
-import { redirect } from "@remix-run/node";
+import { redirect, json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 
 export default function NotesPage() {
+  const notes = useLoaderData();
   return (
     <main>
       <NewNote />
+      <NoteList notes={notes} />
     </main>
   );
+}
+//execute in backend never reach client side
+//data send from backend to frontend
+export async function loader() {
+  const notes = await getStoredNotes();
+  return json(notes);
 }
 
 export async function action({ request }) {
@@ -22,5 +32,5 @@ export async function action({ request }) {
 }
 
 export function links() {
-  return [...newNoteLinks()];
+  return [...newNoteLinks(), ...noteListLinks()];
 }
