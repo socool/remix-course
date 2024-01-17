@@ -1,11 +1,13 @@
 import style from "./NewNote.css";
-import { Form, useNavigation } from "@remix-run/react";
+import { Form, useNavigation, useActionData } from "@remix-run/react";
 
 function NewNote() {
   const navigation = useNavigation();
+  const data = useActionData();
   const isSubmitting = navigation.state === "submitting";
   return (
     <Form method="post" id="note-form">
+      {data?.message && <p>{data.message}</p>}
       <p>
         <label htmlFor="note-title">Title</label>
         <input type="text" id="note-title" name="title" required />
