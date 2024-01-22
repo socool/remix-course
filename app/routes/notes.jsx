@@ -3,6 +3,7 @@ import NoteList, { links as noteListLinks } from "../components/NoteList";
 import { getStoredNotes, storedNotes } from "~/data/notes";
 import { redirect, json } from "@remix-run/node";
 import { useCatch, useLoaderData, Link } from "@remix-run/react";
+import { json } from "@remix-run/node";
 
 export default function NotesPage() {
   const notes = useLoaderData();
@@ -18,6 +19,7 @@ export default function NotesPage() {
 export async function loader() {
   const notes = await getStoredNotes();
   // return json(notes);
+  // CatchBoundary if not catch root will catch
   if (!notes || notes.length === 0) {
     throw json("No notes found", {
       status: 404,
